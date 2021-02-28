@@ -4,6 +4,12 @@ metadata:
   name: httpbindeployment
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 30
   selector:
     matchLabels:
       app: httpbin
@@ -18,7 +24,21 @@ spec:
         image: ganeshsgani/http-bin:6
         ports:
         - containerPort: 80
-      resources:
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 31130
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 31130
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+          periodSeconds: 15
+        resources:
           requests:
             cpu: "100m"
             memory: "64Mi"
@@ -39,5 +59,23 @@ spec:
     port: 6000
     targetPort: 80
     nodePort: 31130
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpadeploymentautoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: httpbindeployment
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - resource:
+        name: cpu
+        targetAverageUtilization: 80
+      type: Resource
+
 
 
