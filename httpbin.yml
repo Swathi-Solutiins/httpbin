@@ -39,20 +39,5 @@ spec:
     port: 6000
     targetPort: 80
     nodePort: 31130
----
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: hpadeploymentautoscaler
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: httpbindeployment
-  minReplicas: 2
-  maxReplicas: 5
-  metrics:
-    - resource:
-        name: cpu
-        targetAverageUtilization: 80
-      type: Resource
+
+
