@@ -24,20 +24,6 @@ spec:
         image: ganeshsgani/http-bin:6
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 31130
-          initialDelaySeconds: 5
-          timeoutSeconds: 1
-          periodSeconds: 15
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 31130
-          initialDelaySeconds: 15
-          timeoutSeconds: 1
-          periodSeconds: 15
         resources:
           requests:
             cpu: "100m"
