@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: httpbinappcontainer
-        image: ganeshsgani/http-bin:${BUILD_NUMBER}
+        image: ganeshsgani/httpbin:${BUILD_NUMBER}
         ports:
         - containerPort: 80
         resources:
