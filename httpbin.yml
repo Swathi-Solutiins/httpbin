@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: httpbindeployment
 spec:
-  replicas: 2
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -55,7 +55,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: httpbindeployment
-  minReplicas: 2
+  minReplicas: 3
   maxReplicas: 5
   metrics:
     - resource:
