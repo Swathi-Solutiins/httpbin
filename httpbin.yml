@@ -37,7 +37,7 @@ kind: Service
 metadata:
   name: httpbin
 spec:
-  type: NodePort
+        type: LoadBalancer
   selector:
     app: httpbin
   ports:
