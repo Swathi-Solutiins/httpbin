@@ -37,13 +37,12 @@ kind: Service
 metadata:
   name: httpbinsvc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: httpbin
   ports:
     - port: 6000
       targetPort: 80
-  externalTrafficPolicy: Cluster
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
