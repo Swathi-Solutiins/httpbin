@@ -35,16 +35,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: httpbin
+  name: httpbinsvc
 spec:
   type: LoadBalancer
   selector:
     app: httpbin
   ports:
-  - protocol: "TCP"
-    port: 6000
-    targetPort: 80
-    nodePort: 31130
+    - port: 6000
+      targetPort: 80
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
